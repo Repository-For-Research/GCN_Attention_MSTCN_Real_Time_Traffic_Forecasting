@@ -1,7 +1,4 @@
-"""Evaluate a saved checkpoint on the METR-LA test split.
 
-    python evaluate.py --config configs/metr_la.yaml --checkpoint checkpoints/seed42/best_model.pth
-"""
 import argparse
 
 import pandas as pd
