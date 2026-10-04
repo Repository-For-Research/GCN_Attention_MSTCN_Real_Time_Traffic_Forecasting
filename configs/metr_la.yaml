@@ -1,0 +1,36 @@
+seed: 42
+device: auto            # auto | cpu | cuda
+
+data:
+  csv_path: data/METR-LA.csv
+  adj_path: data/adj_mx_METR-LA.pkl
+  input_len: 12           # 12 x 5 min = 1 h of history
+  output_len: 12          # 5 ... 60 min, predicted jointly
+  train_ratio: 0.7
+  test_ratio: 0.2         # validation = remainder (0.1)
+  interpolate_missing: false   # false = zeros stay as zeros and are masked (DCRNN protocol)
+  shuffle_train: false
+
+model:
+  node_features: 3        # speed, time-in-day, day-in-week
+  hidden: 32
+  tcn_layers: 3
+  num_heads: 4
+  dropout: 0.2
+
+train:
+  batch_size: 64
+  epochs: 50
+  patience: 10            # early stopping on validation R2
+  lr: 0.001
+  weight_decay: 0.00001
+  lr_factor: 0.5
+  lr_patience: 5
+  grad_clip: 5.0
+
+eval:
+  mape_min_speed: 3.0     # MAPE only on targets above this speed (mph)
+
+output:
+  checkpoint_dir: checkpoints
+  results_dir: results
