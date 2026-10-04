@@ -3,7 +3,6 @@ import torch.nn as nn
 
 
 class GCNLayer(nn.Module):
-    """H = A_hat X W + b (single-hop graph convolution)."""
 
     def __init__(self, in_features: int, out_features: int, bias: bool = True):
         super().__init__()
