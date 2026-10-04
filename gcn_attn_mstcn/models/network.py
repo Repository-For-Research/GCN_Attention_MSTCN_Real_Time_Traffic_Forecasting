@@ -7,12 +7,6 @@ from .mstcn import MSTCNBlock
 
 
 class GCNAttnMSTCN(nn.Module):
-    """GCN -> graph attention -> Transformer-style FFN (residual + LayerNorm)
-    -> multi-scale TCN -> GRU decoder -> MLP head (all horizons at once).
-
-    Input : (B, T_in, N, F) with F = speed, time-in-day, day-in-week
-    Output: (B, T_out, N)   scaled speed predictions
-    """
 
     def __init__(self, node_features=3, hidden=64, tcn_layers=3,
                  out_timesteps=12, dropout=0.2, num_heads=4):
