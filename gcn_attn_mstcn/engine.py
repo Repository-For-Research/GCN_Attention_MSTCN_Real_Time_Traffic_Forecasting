@@ -15,7 +15,7 @@ def evaluate(model, loader, adj, scaler, device, mape_min_speed=3.0):
     for x, _, y_raw in loader:
         pred = model(x.to(device), adj).cpu().numpy()            # (B, T_out, N) scaled
         preds.append(scaler.inverse_transform(pred))
-        labels.append(y_raw.numpy())                              # raw mph, zeros = missing
+        labels.append(y_raw.numpy())                             
     preds, labels = np.concatenate(preds), np.concatenate(labels)
 
     overall = compute_metrics(preds.reshape(-1), labels.reshape(-1), mape_min_speed)
