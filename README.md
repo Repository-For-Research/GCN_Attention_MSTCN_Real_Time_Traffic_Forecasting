@@ -446,7 +446,7 @@ During peak traffic periods, the attention mechanism tends to concentrate on a s
   <img src="images/nonpeak-hour.jpeg" width="85%" alt="Peak versus non-peak spatial attention">
 </p>
 <p align="center">
-  <img src="images/peak-hour.jpeg" width="85%" alt="Peak versus non-peak spatial attention">
+  <img src="images/pick-hour.jpeg" width="85%" alt="Peak versus non-peak spatial attention">
 </p>
 
 
