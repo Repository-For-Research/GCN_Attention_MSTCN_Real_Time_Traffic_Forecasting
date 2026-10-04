@@ -1,9 +1,3 @@
-"""METR-LA loading, windowing, splitting and scaling.
-
-Follows the DCRNN protocol: 12 input steps -> 12 output steps (5-60 min),
-70/10/20 chronological split, one z-score scaler fitted on the training
-speed channel only and reused for every split.
-"""
 import pickle
 from dataclasses import dataclass
 
@@ -13,9 +7,7 @@ import torch
 from torch.utils.data import DataLoader, TensorDataset
 
 
-class StandardScaler:
-    """z-score scaler for the speed channel (fit on train only)."""
-
+class StandardScaler:    
     def __init__(self, mean: float, std: float):
         self.mean = float(mean)
         self.std = float(std)
@@ -37,7 +29,6 @@ def load_metr_la(csv_path: str, interpolate_missing: bool = False) -> pd.DataFra
 
 def generate_seq2seq_io_data(df, x_offsets, y_offsets,
                              add_time_in_day=True, add_day_in_week=True):
-    """Return X: (S, T_in, N, F) and Y: (S, T_out, N) with speed as target."""
     num_samples, num_nodes = df.shape
     feats = [np.expand_dims(df.values, axis=-1)]
 
@@ -64,7 +55,6 @@ def load_adjacency(pkl_path: str):
 
 
 def normalize_adj(adj: torch.Tensor) -> torch.Tensor:
-    """Symmetric normalisation  D^-1/2 (A + I) D^-1/2."""
     n = adj.size(0)
     a_hat = adj + torch.eye(n, device=adj.device)
     deg_inv_sqrt = a_hat.sum(dim=1).pow(-0.5)
