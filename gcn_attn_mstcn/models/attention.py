@@ -4,11 +4,6 @@ import torch.nn.functional as F
 
 
 class GraphAttention(nn.Module):
-    """Multi-head graph attention restricted to the (normalised) adjacency support.
-
-    Set `return_scores=True` to get pre-softmax scores or `return_attention=True`
-    to get the post-softmax weights; both are used by `explain_attention.py`.
-    """
 
     def __init__(self, in_dim: int, num_heads: int = 4, dropout: float = 0.1,
                  alpha: float = 0.2, temperature: float = 0.5):
